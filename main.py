@@ -1,21 +1,7 @@
-from selenium import webdriver
+import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.service import Service
-import time
-
-
-def setup_driver():
-    """Initialize and return a Chrome WebDriver instance."""
-    service = Service(executable_path="chromedriver.exe")
-    return webdriver.Chrome(service=service)
-
-
-def open_bybit_page(driver, url):
-    """Open the Bybit page and wait for it to load."""
-    driver.get(url)
-    time.sleep(3)
 
 
 def handle_modal(driver):
@@ -33,10 +19,10 @@ def handle_modal(driver):
 
 def main():
     url = "https://www.bybit.com/en/fiat/trade/otc/sell/USDT/PHP"
-    driver = setup_driver()
+    driver = uc.Chrome()
 
     try:
-        open_bybit_page(driver, url)
+        driver.get(url)
         handle_modal(driver)
     except Exception as e:
         print("Unexpected error:", e)
