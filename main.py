@@ -7,11 +7,13 @@ from selenium.webdriver.support import expected_conditions as EC
 def handle_modal(driver):
     """Wait for the modal to appear and confirm it."""
     try:
-        wait = WebDriverWait(driver, 10)
-        confirm_button = wait.until(
-            EC.element_to_be_clickable((By.CLASS_NAME, "ant-btn-primary"))
+        wait = WebDriverWait(driver, 20)
+        btn = driver.find_element(
+            By.XPATH,
+            "/html/body/div[14]/div/div[2]/div/div[2]/div/div/div/div/button",
         )
-        driver.execute_script("arguments[0].click();", confirm_button)
+        wait.until(EC.element_to_be_clickable(btn))
+        btn.click()
         print("Confirmed the modal.")
     except Exception as e:
         print("Error handling modal:", e)
